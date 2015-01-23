@@ -100,7 +100,7 @@ set mousehide							" 入力時にマウスポインタを隠す
 "----------------------------
 " GUI
 if has('gui_running')
-	set columns=80						" ウィンドウの幅
+	set columns=126						" ウィンドウの幅
 	set lines=999						" ウィンドウの高さ
 	winpos 1002 0						" ウィンドウの位置
 	set guioptions-=m
