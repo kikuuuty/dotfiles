@@ -39,10 +39,10 @@ set wrapscan							" 検索が最後尾まで到達したら先頭へ戻る
 
 "----------------------------
 " 編集
+set smarttab							" 
+set noexpandtab							" タブをスペースに展開しない
 set tabstop=4							" タブ幅
 set shiftwidth=4						" オートインデントの幅
-set noexpandtab							" タブをスペースに展開しない
-set smarttab							" 
 set backspace=indent,eol,start			" バックスペースでインデントや改行を削除できるようにする
 set cindent								" Cの自動インデントを有効化する
 set cinoptions=:0,g0					" インデントスタイルを設定
