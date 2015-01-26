@@ -61,6 +61,14 @@ augroup CustomFileType
 augroup END
 
 "----------------------------
+" QuickFix
+autocmd QuickFixCmdPost *grep* cwindow	" vimgrepの検索結果を常にQuickFixに開く
+
+"----------------------------
+" tags
+set tags=./.tags;,./tags;				" タグファイルを親ディレクトリに向かって検索
+
+"----------------------------
 " 装飾
 set number								" 行番号を表示
 set cursorline							" カーソル行を強調表示する
