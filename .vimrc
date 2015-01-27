@@ -50,8 +50,8 @@ set cinoptions=:0,g0                    " インデントスタイルを設定
 set nrformats-=octal                    " <C-a>,<C-x>の際に8進数を無効にする
 set ambiwidth=double                    " □や○の文字があってもカーソル位置がずれないようにする
 if has('win32')
-set iminsert=0                          " 挿入モード時のデフォルトのIMEの挙動を設定
-set imsearch=-1                         " iminsertに合わせる
+    set iminsert=0                      " 挿入モード時のデフォルトのIMEの挙動を設定
+    set imsearch=-1                     " iminsertに合わせる
 endif
 set lazyredraw                          " マクロなどの途中経過を再描画しない
 set formatoptions+=mM                   " 日本語の行の連結時には空白を入力しない
