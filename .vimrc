@@ -8,6 +8,8 @@ set fileencodings=utf-8,cp932,euc-jp
 scriptencoding utf-8
 "set bomb
 
+set runtimepath+=$HOME/.vim,$HOME/.vim/after
+
 "----------------------------
 " NeoBundle
 
@@ -56,8 +58,8 @@ endif
 set lazyredraw                          " マクロなどの途中経過を再描画しない
 set formatoptions+=mM                   " 日本語の行の連結時には空白を入力しない
 augroup CustomFileType 
-autocmd!
-autocmd FileType * setlocal formatoptions-=t formatoptions+=rol
+    autocmd!
+    autocmd FileType * setlocal formatoptions-=t formatoptions+=rol
 augroup END
 
 "----------------------------
@@ -85,7 +87,7 @@ set cmdheight=1                         " コマンドラインの高さ
 "----------------------------
 " フォント
 set guifont=Consolas
-set guifontwide=TakaoGothic:h11
+set guifontwide=TakaoGothic:h10
 set linespace=4                         " 行間の指定
 
 "----------------------------
@@ -95,8 +97,10 @@ if &t_Co > 2 || has('gui_running')
     set hlsearch                        " 検索文字列をハイライトする
 endif
 
-let g:solarized_termcolors=256
 set background=light
+let g:solarized_termcolors=256
+let g:solarized_italic=0
+let g:solarized_contrast="high"
 colorscheme solarized
 
 "----------------------------
@@ -108,10 +112,16 @@ set mousehide                           " 入力時にマウスポインタを�
 "----------------------------
 " GUI
 if has('gui_running')
-    set columns=126                     " ウィンドウの幅
-    set lines=999                       " ウィンドウの高さ
-    winpos 1002 0                       " ウィンドウの位置
     set guioptions-=m
     set guioptions-=T
+"   set columns=126                     " ウィンドウの幅
+"   set lines=999                       " ウィンドウの高さ
+"   winpos 1002 0                       " ウィンドウの位置
+endif
+
+"----------------------------
+" 環境依存
+if filereadable(expand($HOME.'/.vimrc_local'))
+    source $HOME/.vimrc_local
 endif
 
