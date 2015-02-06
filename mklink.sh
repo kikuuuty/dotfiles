@@ -3,4 +3,6 @@ ln -sf ~/dotfiles/.vimrc ~/.vimrc
 ln -sf ~/dotfiles/.gvimrc ~/.gvimrc
 mkdir ~/.vim
 ln -sf ~/dotfiles/colors ~/.vim/colors
+ln -sf ~/dotfiles/syntax ~/.vim/syntax
+ln -sf ~/dotfiles/ftdetect ~/.vim/ftdetect
 

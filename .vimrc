@@ -6,7 +6,7 @@ set termencoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8,cp932,euc-jp
 scriptencoding utf-8
-"set bomb
+set bomb
 
 set runtimepath+=$HOME/.vim,$HOME/.vim/after
 
@@ -100,7 +100,7 @@ endif
 set background=light
 let g:solarized_termcolors=256
 let g:solarized_italic=0
-let g:solarized_contrast="high"
+"let g:solarized_contrast="high"
 colorscheme solarized
 
 "----------------------------
