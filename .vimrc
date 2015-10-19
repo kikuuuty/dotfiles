@@ -85,23 +85,11 @@ set laststatus=2                        " 常にステータス行を表示す�
 set cmdheight=1                         " コマンドラインの高さ
 
 "----------------------------
-" フォント
-set guifont=Consolas
-set guifontwide=TakaoGothic:h10
-set linespace=4                         " 行間の指定
-
-"----------------------------
 " シンタックスハイライト
 if &t_Co > 2 || has('gui_running')
     syntax enable                       " シンタックスハイライトを有効にする
     set hlsearch                        " 検索文字列をハイライトする
 endif
-
-set background=light
-let g:solarized_termcolors=256
-let g:solarized_italic=0
-"let g:solarized_contrast="high"
-colorscheme solarized
 
 "----------------------------
 " マウス
@@ -114,9 +102,6 @@ set mousehide                           " 入力時にマウスポインタを�
 if has('gui_running')
     set guioptions-=m
     set guioptions-=T
-"   set columns=126                     " ウィンドウの幅
-"   set lines=999                       " ウィンドウの高さ
-"   winpos 1002 0                       " ウィンドウの位置
 endif
 
 "----------------------------
