@@ -5,10 +5,11 @@ set encoding=utf-8
 set termencoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8,cp932,euc-jp
-scriptencoding utf-8
 set bomb
 
 set runtimepath+=$HOME/.vim,$HOME/.vim/after
+
+scriptencoding utf-8
 
 "----------------------------
 " NeoBundle
