@@ -1,4 +1,3 @@
-
 autocmd VimEnter * nested if @% == '' && s:GetBufByte() == 0 | set filetype=python | endif
 function! s:GetBufByte()
     let byte = line2byte(line('$') + 1)

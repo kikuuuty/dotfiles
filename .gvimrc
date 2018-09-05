@@ -5,4 +5,3 @@ set visualbell t_vb=                    " .gvimrcでもう一度設定し直す�
 if has('multi_byte_ime')
     highlight CursorIM guibg=Purple guifg=NONE
 endif
-

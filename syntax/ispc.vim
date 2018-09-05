@@ -38,4 +38,3 @@ HiLink ispcOperator	Operator
 delcommand HiLink
 
 let b:current_syntax = "ispc"
-

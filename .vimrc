@@ -94,6 +94,10 @@ if &t_Co > 2 || has('gui_running')
 endif
 
 "----------------------------
+" ファイルタイププラグイン
+filetype plugin on
+
+"----------------------------
 " マウス
 set mouse=a                             " どのモードでもマウスを使えるようにする
 set nomousefocus                        " マウスの移動でフォーカスを自動的に切り替えない
@@ -111,4 +115,3 @@ endif
 if filereadable(expand($HOME.'/.vimrc_local'))
     source $HOME/.vimrc_local
 endif
-
