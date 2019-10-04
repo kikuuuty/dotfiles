@@ -1,0 +1,22 @@
+
+"----------------------------
+" フォント
+set guifont=Consolas
+set guifontwide=MS_Gothic
+set linespace=4                         " 行間の指定
+
+"----------------------------
+" カラースキーマ
+set background=light
+let g:solarized_termcolors=256
+let g:solarized_italic=0
+"let g:solarized_contrast="high"
+colorscheme solarized
+
+"----------------------------
+" ウィンドウサイズ
+if has('gui_running')
+   set columns=126                     " ウィンドウの幅
+   set lines=999                       " ウィンドウの高さ
+   winpos 1000 0                       " ウィンドウの位置
+endif
