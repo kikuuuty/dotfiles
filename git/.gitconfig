@@ -1,19 +1,19 @@
 [user]
-	name = kikuuuty
-	email = kikuuuty@gmail.com
+    name = kikuuuty
+    email = kikuuuty@gmail.com
 [core]
-	autocrlf = false
-	quotepath = false
-	pager = LESSCHARSET=utf-8 less -S
-	editor = 'C:/Program Files (x86)/Vim/vim81/gvim.exe'
+    autocrlf = false
+    quotepath = false
+    pager = LESSCHARSET=utf-8 less -S
+    editor = 'C:/Program Files (x86)/Vim/vim81/gvim.exe'
 [gui]
-	encoding = utf-8
+    encoding = utf-8
 [filter "lfs"]
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
+    required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
 [alias]
     alias = !git config --get-regexp '^alias\\.' | sed 's/alias\\.\\([^ ]*\\) \\(.*\\)/\\1\\\t => \\2/' | sort
     st = status
-	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
