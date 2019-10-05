@@ -1,7 +1,3 @@
-mkdir %HOMEDRIVE%%HOMEPATH%"\.vim"
 mklink %HOMEDRIVE%%HOMEPATH%"\.vimrc" %~dp0".vimrc"
 mklink %HOMEDRIVE%%HOMEPATH%"\.gvimrc" %~dp0".gvimrc"
-mklink /D %HOMEDRIVE%%HOMEPATH%"\.vim\colors" %~dp0"colors"
-mklink /D %HOMEDRIVE%%HOMEPATH%"\.vim\ftdetect" %~dp0"ftdetect"
-mklink /D %HOMEDRIVE%%HOMEPATH%"\.vim\plugin" %~dp0"plugin"
-mklink /D %HOMEDRIVE%%HOMEPATH%"\.vim\syntax" %~dp0"syntax"
+mklink /D %HOMEDRIVE%%HOMEPATH%"\.vim" %~dp0".vim"
