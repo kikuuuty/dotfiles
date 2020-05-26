@@ -4,6 +4,7 @@
 [core]
     autocrlf = false
     quotepath = false
+    ignorecase = false
     pager = LESSCHARSET=utf-8 less -S
     editor = 'C:/Program Files (x86)/Vim/vim81/gvim.exe'
 [gui]
