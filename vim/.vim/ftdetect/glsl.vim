@@ -5,3 +5,5 @@ au BufNewFile,BufRead *.tese set filetype=glsl
 au BufNewFile,BufRead *.geom set filetype=glsl
 au BufNewFile,BufRead *.frag set filetype=glsl
 au BufNewFile,BufRead *.comp set filetype=glsl
+au BufNewFile,BufRead *.vs set filetype=glsl
+au BufNewFile,BufRead *.fs set filetype=glsl
