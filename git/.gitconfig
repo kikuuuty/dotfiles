@@ -5,7 +5,7 @@
     autocrlf = false
     quotepath = false
     ignorecase = false
-    editor = 'C:/Program Files (x86)/Vim/vim82/gvim.exe'
+    editor = 'C:/Program Files/Vim/vim91/gvim.exe'
     pager = LESSCHARSET=utf-8 less -S
 [gui]
     encoding = utf-8
