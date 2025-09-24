@@ -1,7 +1,7 @@
 
 "----------------------------
 " フォント
-set guifont=Consolas
+set guifont=Consolas:h10
 set guifontwide=MS_Gothic
 set linespace=4                         " 行間の指定
 
@@ -16,7 +16,7 @@ colorscheme solarized
 "----------------------------
 " ウィンドウサイズ
 if has('gui_running')
-   set columns=126                     " ウィンドウの幅
-   set lines=999                       " ウィンドウの高さ
-   winpos 1000 0                       " ウィンドウの位置
+   set columns=119                     " ウィンドウの幅
+   set lines=52                        " ウィンドウの高さ
+   winpos 2210 320                     " ウィンドウの位置
 endif
