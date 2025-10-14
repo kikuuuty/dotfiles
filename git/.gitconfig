@@ -5,7 +5,7 @@
     autocrlf = false
     quotepath = false
     ignorecase = false
-    editor = 'C:/Program Files/Vim/vim91/gvim.exe'
+    editor = 'C:/Program Files/Neovide/neovide.exe'
     pager = LESSCHARSET=utf-8 less -S
 [gui]
     encoding = utf-8
