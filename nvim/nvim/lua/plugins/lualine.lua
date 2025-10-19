@@ -36,16 +36,23 @@ return {
                 section_separators = { left = "", right = ""},
             },
             sections = {
-                lualine_a = { { function() return vim.b.git_branch_cached or "" end, icon = "", }, },
-                lualine_b = { "filename", },
-                lualine_c = { "diff", "diagnostics", },
+                lualine_a = { "filename", },
+                lualine_b = {
+                    { function() return vim.b.git_branch_cached or "" end, icon = "", separator = "", },
+                    { "diff", separator = "", },
+                },
+                lualine_c = { "diagnostics", },
                 lualine_x = {
                     { "lsp_status", separator = "|", padding = { left = 1, right = 1 }, },
                     { "encoding",   separator = "|", padding = { left = 1, right = 1 }, },
                     { "fileformat", separator = "|", padding = { left = 1, right = 1 }, },
                 },
-                lualine_y = { "location", },
-                lualine_z = { "progress", },
+                lualine_y = {
+                    { "location", separator = "", },
+                },
+                lualine_z = {
+                    { "progress", separator = "", },
+                },
             },
         })
     end,
