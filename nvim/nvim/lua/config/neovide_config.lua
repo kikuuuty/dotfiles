@@ -27,10 +27,10 @@ vim.o.guifont = "FiraMono Nerd Font Mono:h10"
 -- Title Bar Color
 local hl = vim.api.nvim_get_hl(0, { name = "Normal" })
 if hl and hl.bg then
-    vim.g.neovide_title_background_color = string.format("#%06x", hl.bg)
+  vim.g.neovide_title_background_color = string.format("#%06x", hl.bg)
 end
 if hl and hl.fg then
-    vim.g.neovide_title_text_color = string.format("#%06x", hl.fg)
+  vim.g.neovide_title_text_color = string.format("#%06x", hl.fg)
 end
 
 vim.api.nvim_create_autocmd("ColorScheme", {
@@ -219,5 +219,4 @@ vim.g_neovide_no_idle = false
 -- Particle Curl
 -- Only for the vfx mode.railgun
 --vim.g.neovide_cursor_vfx_particle_curl = 1.0
-
 

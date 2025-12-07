@@ -63,8 +63,8 @@ vim.opt.laststatus    = 2                                   -- ステータス�
 vim.opt.cmdheight     = 1                                   -- コマンドライン高さ
 vim.opt.shortmess:append('I')                               -- 起動メッセージ抑制
 vim.opt.shortmess:append('c')                               -- 補完メッセージ簡素化
-vim.opt.splitright    = true                                -- 垂直分割は右に開く
-vim.opt.splitbelow    = true                                -- 水平分割は下に開く
+vim.opt.splitright    = false                               -- 垂直分割は左に開く
+vim.opt.splitbelow    = false                               -- 水平分割は上に開く
 vim.opt.signcolumn    = 'yes'                               -- サインカラム固定
 vim.opt.termguicolors = true                                -- 24bitカラー
 vim.opt.scrolloff     = 5                                   -- 上下の余白
