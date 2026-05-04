@@ -8,9 +8,7 @@ return {
     config = function()
       require("catppuccin").setup({
         flavour = "macchiato",
-        styles = {
-          comments = {}, -- コメントの italic を消す
-        },
+        no_italic = true, -- colorscheme 側の italic をすべて消す
         integrations = {
           telescope = {
             enabled = true,
