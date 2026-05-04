@@ -4,9 +4,9 @@
 
 
 -- Font
---vim.o.guifont = "Consolas:h10"
-vim.o.guifont = "FiraMono Nerd Font Mono:h10"
---vim.o.guifont = "JetBrainsMonoNL NFM:h10"
+--vim.o.guifont = "Consolas:h12"
+vim.o.guifont = "FiraMono Nerd Font Mono:h12"
+--vim.o.guifont = "JetBrainsMonoNL NFM:h12"
 
 -- Line spacing
 --vim.opt.linespace = 0
@@ -94,7 +94,7 @@ vim.g.neovide_scroll_animation_length = 0.233
 --vim.g.neovide_refresh_rate_idle = 5
 
 -- No Idle
-vim.g_neovide_no_idle = false
+vim.g.neovide_no_idle = false
 
 -- Confirm Quit
 --vim.g.neovide_confirm_quit = true

@@ -1,1 +1,1 @@
-mklink /D %LOCALAPPDATA%"\nvim" %~dp0"nvim"
+mklink /D "%LOCALAPPDATA%\nvim" "%~dp0nvim"

@@ -7,11 +7,12 @@ return {
     keymap = {
       preset = "none",
       ["<C-Space>"] = { "show" },
+      ["<Tab>"]     = { "accept", "fallback" },
+      ["<S-Tab>"]   = { "fallback" },
       ["<C-n>"]     = { "select_next", "show" },
       ["<C-p>"]     = { "select_prev", "show" },
       ["<Up>"]      = { "select_prev", "fallback" },
       ["<Down>"]    = { "select_next", "fallback" },
-      ["<Tab>"]     = { "accept", "fallback" },
       ["<CR>"]      = { "accept", "fallback" },
     },
     appearance = {
@@ -19,8 +20,16 @@ return {
     },
     completion = {
       menu = { auto_show = true },
-      list = { selection = { preselect = false, auto_insert = true } },
-      ghost_text = { enabled = true, show_with_menu = true },
+      list = { selection = { preselect = false, auto_insert = false } },
+      documentation = {
+        auto_show = true,
+        auto_show_delay_ms = 500,
+      },
+      ghost_text = {
+        enabled = true,
+        show_with_menu = true,
+        show_without_menu = false,
+      },
     },
     sources = {
       default = { "lsp", "buffer", "snippets", "path" },

@@ -7,7 +7,7 @@ local function update_git_branch()
     return
   end
 
-  local out = vim.fn.systemlist({ "git", "-C", file_dir, "branch", "--show-current" })
+  local out = vim.fn.systemlist({ "git", "-C", file_dir, "rev-parse", "--abbrev-ref", "HEAD" })
   if vim.v.shell_error ~= 0 or not out[1] or out[1] == "" then
     -- Git 管理外の場合はプレースホルダー
     vim.b.git_branch_cached = "untracked"

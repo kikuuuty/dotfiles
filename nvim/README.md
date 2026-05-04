@@ -1,53 +1,91 @@
 # Neovim 設定 (Windows)
 
-このフォルダには Windows 環境向けの Neovim 設定が入っています。`install.bat` を実行すると `%LOCALAPPDATA%\nvim` にシンボリックリンクを張り、この設定で Neovim を起動できます。
+このフォルダは Windows 環境向けの Neovim 設定です。`nvim/install.bat` を実行すると、`nvim/nvim` を `%LOCALAPPDATA%\nvim` にシンボリックリンクします。
 
-この README は Codex (GPT-5.1-Codex-Max) によって作成されています。
-
-## 事前にインストールしておくソフトウェア (winget)
-
-> すべて「コマンド プロンプト」を管理者として起動し、以下のコマンドを順番に実行してください。
+## 前提ツール
 
 | 用途 | winget コマンド |
 | ---- | --------------- |
 | Neovim 本体 | `winget install -e --id Neovim.Neovim` |
-| Git (lazy.nvim のブートストラップで使用) | `winget install -e --id Git.Git` |
-| Clang/clangd (C++ LSP と C/C++ ビルドに使用) | `winget install -e --id LLVM.LLVM` |
-| CMake (telescope-fzf-native のビルドに使用) | `winget install -e --id Kitware.CMake` |
-| ripgrep (Telescope の live grep に使用) | `winget install -e --id BurntSushi.ripgrep` |
-| fd (Telescope のファイル検索に使用) | `winget install -e --id sharkdp.fd` |
-| Ninja (オプションだがビルドを高速化) | `winget install -e --id Ninja-build.Ninja` |
+| Git | `winget install -e --id Git.Git` |
+| LLVM / Clang / clangd | `winget install -e --id LLVM.LLVM` |
+| CMake | `winget install -e --id Kitware.CMake` |
+| ripgrep | `winget install -e --id BurntSushi.ripgrep` |
+| fd | `winget install -e --id sharkdp.fd` |
+| Ninja (任意) | `winget install -e --id Ninja-build.Ninja` |
 
-## インストール手順
+Treesitter parser 更新には `tree-sitter-cli` も必要です。C/C++ LSP と native plugin build のため、`clangd`、C/C++ compiler、`cmake` が PATH から使える状態にしてください。
 
-1. 依存ソフトを上記 winget コマンドでインストールする。
-2. このリポジトリをクローン (または取得) し、`nvim/install.bat` をダブルクリックまたは コマンド プロンプト で実行する。
-3. 初回起動時に lazy.nvim が自動で取得され、プラグインがインストールされる。
+## インストール
 
-## プラグインごとのセットアップ
+権限のある Command Prompt で `nvim/install.bat` を実行します。
 
-### LSP (clangd / lua_ls)
-- `mason.nvim` と `mason-lspconfig.nvim` で `clangd` と `lua_ls` を管理しています【F:nvim/nvim/lua/plugins/lspconfig.lua†L4-L60】。
-- C++ 用には `clangd` を使用します。上記の LLVM パッケージで導入済みなら `:Mason` を開いてインストール状態を確認してください。Mason から導入する場合はウィンドウで `clangd` を選択して Enter でインストールできます。
-- `clangd` は `--query-driver=**/cl.exe;**/clang*.exe;**/clang++.exe` など LLVM ドライバを自動検出するよう設定済みです【F:nvim/nvim/lua/plugins/lspconfig.lua†L39-L50】。
-- Lua 言語サーバは `lua_ls` を使用します。必要に応じて `:Mason` でインストールしてください。
+```bat
+nvim\install.bat
+```
 
-### Treesitter
-- `nvim-treesitter` を `:TSUpdate` で自動更新する設定です【F:nvim/nvim/lua/plugins/treesitter.lua†L2-L16】。
-- `ensure_installed` に `c`, `cpp`, `lua`, `python`, `json` が登録されています【F:nvim/nvim/lua/plugins/treesitter.lua†L6-L14】。
-- パーサーのビルドには C コンパイラと `cmake` が必要です。LLVM/Clang をインストールした上で `:TSUpdate` を実行し、パーサーをビルドしてください。
+初回起動時に `nvim/nvim/lua/config/lazy.lua` が lazy.nvim を取得し、`nvim/nvim/lua/plugins/*.lua` の plugin spec を読み込みます。
 
-### Telescope + fzf
-- `telescope-fzf-native.nvim` は CMake でビルドします【F:nvim/nvim/lua/plugins/telescope.lua†L106-L174】。CMake と LLVM/Clang (C++ コンパイラ) がセットアップされていればインストール時に自動ビルドされます。
-- `live_grep` / `grep_string` には `ripgrep` が必要で、ファイル検索には `fd` を使います (いずれも上記 winget のコマンドで導入)【F:nvim/nvim/lua/plugins/telescope.lua†L58-L73】。
-- ビルドが失敗した場合でも Neovim の起動は止まりませんが、`<leader>f` などのファジー検索を高速化するために成功しているか確認してください。
+## 構成
 
-## よく使うコマンド
-- `:Mason` … LSP サーバ・ツールのインストール/アップデート UI を開く。
-- `:TSUpdate` … Treesitter パーサーを更新する。
-- `<C-p>` / `<leader>f` … Telescope で Git ファイル検索 / ライブグレップ。
+- `nvim/nvim/init.lua`: エントリポイント。`config.options`、`config.lazy`、`config.keymaps` を読み込み、Neovide の時だけ `config.neovide_config` を読み込みます。
+- `nvim/nvim/lua/config/options.lua`: Windows/Japanese 前提の基本オプション。UTF-8、DOS 改行、BOM、`autochdir` などを設定します。
+- `nvim/nvim/lua/config/keymaps.lua`: LuaSnip、Diagnostic、LSP、Telescope の keymap。
+- `nvim/nvim/lua/plugins/*.lua`: lazy.nvim で読み込む plugin 設定。
+- `nvim/nvim/after/ftplugin/lua.lua`: Lua ファイルだけ indent 幅を 2 にします。
 
-## C++ 向け補足
-- LLVM/Clang を標準の C/C++ ツールチェーンとして利用します。`clangd` による補完と、Treesitter・telescope-fzf-native のビルドに必要です。
-- `cmake` と `ninja` が PATH 上にあることを確認してください。
-- LSP 補完 (clangd) と Treesitter の両方が C++ ソース解析に利用されます。両者のビルドが通ることを確認するため、初回は `:Mason` と `:TSUpdate` を実行するのがおすすめです。
+## 補完
+
+- 補完は `blink.cmp` と LuaSnip を使います。
+- `blink.cmp` は入力中に補完メニューを自動表示し、候補の確定は `<Tab>` または `<CR>` で行います。
+- `preselect = false`、`auto_insert = false` なので、候補移動だけでは本文を書き換えません。
+- ghost text は補完メニュー表示中だけ出します。
+- documentation は候補選択中に自動表示します。
+
+## LSP
+
+- Mason は `clangd` と `lua_ls` を管理します。
+- `mason-lspconfig.nvim` は `automatic_enable = false`。LSP は `nvim-lspconfig.lua` で `vim.lsp.enable({ "clangd", "lua_ls" })` により手動有効化しています。
+- `clangd` は `--background-index`、`--clang-tidy`、`--query-driver=**/cl.exe;**/clang*.exe;**/clang++.exe` などを指定しています。
+- `lua_ls` は `vim` global を diagnostic の既知 symbol として扱います。
+
+## Treesitter
+
+- 対象 parser は `c`、`cpp`、`lua`、`python`、`json` です。
+- `auto_install = false` のため、parser 更新は必要に応じて `:TSUpdate` を実行します。
+- highlight は Treesitter を使います。
+- indent は Treesitter を有効にしていますが、`c` / `cpp` は無効化して標準の `cindent` を使います。
+
+## Telescope
+
+- `<C-p>` は Git 管理ファイル検索です。
+- `<leader>f` と `<leader>g` は Git repository root を `cwd` にして grep します。`autochdir` 有効時に、開いているファイルの子ディレクトリだけを検索しないためです。
+- `path_display` は `filename.ext (path/to/parent/)` 形式で表示し、括弧内を薄く表示します。
+- `telescope-fzf-native.nvim` は Windows 用の独自 build 関数を持ち、CMake configure/build 後に `libfzf.dll` を期待位置へ移します。
+
+## よく使う Keymap
+
+- `<C-p>`: Telescope で Git 管理ファイルを検索。
+- `<leader>f`: repository 全体を live grep。
+- `<leader>g`: カーソル下の単語を repository 全体で grep。
+- `<leader>/`: 現在 buffer 内を fuzzy 検索。
+- `<leader>b`: buffer 一覧。
+- `<leader>o`: 最近開いたファイル。
+- `<leader>q`: Telescope で diagnostic 一覧。
+- `<leader>h`: help 検索。
+- `<leader>k`: keymap 一覧。
+- `gd` / `gD` / `gr` / `gt` / `gi`: LSP の定義、宣言、参照、型定義、実装へ移動。
+- `<leader>gd` / `<leader>gr` / `<leader>gt` / `<leader>gi`: Telescope 経由の LSP jump / 一覧。
+- `[d` / `]d`: 前後の diagnostic へ移動。
+- `<leader>e`: 現在位置の diagnostic を表示。
+- `<leader>rn`: LSP rename。
+
+## 確認
+
+設定の読み込み確認は repo root から実行します。
+
+```bat
+nvim --headless -u nvim/nvim/init.lua "+qa"
+```
+
+実行時依存の確認には `:Lazy`、`:Mason`、`:TSUpdate` を使います。

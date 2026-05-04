@@ -21,6 +21,7 @@
 
       indent = {
         enable = true,  -- インデントを有効に
+        disable = { "c", "cpp" }, -- C/C++ は標準の cindent を使う
       },
     })
   end,

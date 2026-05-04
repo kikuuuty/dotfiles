@@ -6,6 +6,18 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
+      require("catppuccin").setup({
+        flavour = "macchiato",
+        styles = {
+          comments = {}, -- コメントの italic を消す
+        },
+        integrations = {
+          telescope = {
+            enabled = true,
+          },
+        },
+      })
+
       vim.cmd.colorscheme("catppuccin-macchiato")
     end,
   },

@@ -19,12 +19,17 @@ return {
         path_display = function(_, path)
           -- パス表示は filename.ext (path/to/parent/) 形式
           local tail = require("telescope.utils").path_tail(path)
-          local macchiato_text = string.format("%s (%s)", tail, path)
-          local tail_len = #tail
-          local path_start = tail_len + 1
+          local parent = path:sub(1, #path - #tail)
+          if parent == "" then
+            return tail
+          end
+
+          local display_path = string.format("%s (%s)", tail, parent)
+          local parent_start = #tail + 1
+          local parent_end = #display_path
           -- 親ディレクトリパスは少しグレーアウトさせる
-          return macchiato_text, {
-            { { path_start, #macchiato_text }, "Comment" },
+          return display_path, {
+            { { parent_start, parent_end }, "Comment" },
           }
         end,
 
@@ -50,28 +55,28 @@ return {
       },
     },
     config = function(_, opts)
-      local function setup_highlights()
-        -- とりあえず catppuccin のカラーコードでハードコーディング
-        -- todo: colorscheme に合わせて適当に切り替わるようにしたい
-        local text = "#cdd6f4"
-        local blue = "#98b4fa"
-        local mantle = "#1e1e2e"
-        local crust = "#181825"
-        vim.api.nvim_set_hl(0, "TelescopeNormal",       { bg = crust, fg = text })
-        vim.api.nvim_set_hl(0, "TelescopeBorder",       { bg = crust, fg = crust })
-        vim.api.nvim_set_hl(0, "TelescopePromptNormal", { bg = crust })
-        vim.api.nvim_set_hl(0, "TelescopePromptBorder", { bg = crust, fg = crust })
-        vim.api.nvim_set_hl(0, "TelescopePromptTitle",  { bg = crust, fg = blue })
-        vim.api.nvim_set_hl(0, "TelescopeResultsNormal",{ bg = mantle })
-        vim.api.nvim_set_hl(0, "TelescopeResultsBorder",{ bg = mantle, fg = mantle })
-        vim.api.nvim_set_hl(0, "TelescopeResultsTitle", { bg = mantle, fg = blue })
-        vim.api.nvim_set_hl(0, "TelescopePreviewNormal",{ bg = crust })
-        vim.api.nvim_set_hl(0, "TelescopePreviewBorder",{ bg = crust, fg = crust })
-        vim.api.nvim_set_hl(0, "TelescopePreviewTitle", { bg = crust, fg = blue })
-      end
+      --local function setup_highlights()
+      --  -- とりあえず catppuccin のカラーコードでハードコーディング
+      --  -- todo: colorscheme に合わせて適当に切り替わるようにしたい
+      --  local text = "#cdd6f4"
+      --  local blue = "#98b4fa"
+      --  local mantle = "#1e1e2e"
+      --  local crust = "#181825"
+      --  vim.api.nvim_set_hl(0, "TelescopeNormal",       { bg = crust, fg = text })
+      --  vim.api.nvim_set_hl(0, "TelescopeBorder",       { bg = crust, fg = crust })
+      --  vim.api.nvim_set_hl(0, "TelescopePromptNormal", { bg = crust })
+      --  vim.api.nvim_set_hl(0, "TelescopePromptBorder", { bg = crust, fg = crust })
+      --  vim.api.nvim_set_hl(0, "TelescopePromptTitle",  { bg = crust, fg = blue })
+      --  vim.api.nvim_set_hl(0, "TelescopeResultsNormal",{ bg = mantle })
+      --  vim.api.nvim_set_hl(0, "TelescopeResultsBorder",{ bg = mantle, fg = mantle })
+      --  vim.api.nvim_set_hl(0, "TelescopeResultsTitle", { bg = mantle, fg = blue })
+      --  vim.api.nvim_set_hl(0, "TelescopePreviewNormal",{ bg = crust })
+      --  vim.api.nvim_set_hl(0, "TelescopePreviewBorder",{ bg = crust, fg = crust })
+      --  vim.api.nvim_set_hl(0, "TelescopePreviewTitle", { bg = crust, fg = blue })
+      --end
 
       require('telescope').setup(opts)
-      setup_highlights()
+      --setup_highlights()
     end,
   },
   {
