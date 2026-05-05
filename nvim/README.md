@@ -59,7 +59,10 @@ nvim\install.bat
 ## Telescope
 
 - `<C-p>` は Git 管理ファイル検索です。
-- `<leader>f` と `<leader>g` は Git repository root を `cwd` にして grep します。`autochdir` 有効時に、開いているファイルの子ディレクトリだけを検索しないためです。
+- `<leader>f` は Git repository root 全体を live grep します。`autochdir` 有効時に、開いているファイルの子ディレクトリだけを検索しないためです。
+- `<leader>g` はカーソル下の単語を repository root 全体で grep します。
+- `<leader>gy` は yank したテキストを grep します。
+- `<leader>g*` はクリップボードのテキストを grep します。
 - `path_display` は `filename.ext (path/to/parent/)` 形式で表示し、括弧内を薄く表示します。
 - `telescope-fzf-native.nvim` は Windows 用の独自 build 関数を持ち、CMake configure/build 後に `libfzf.dll` を期待位置へ移します。
 
@@ -68,6 +71,8 @@ nvim\install.bat
 - `<C-p>`: Telescope で Git 管理ファイルを検索。
 - `<leader>f`: repository 全体を live grep。
 - `<leader>g`: カーソル下の単語を repository 全体で grep。
+- `<leader>gy`: yank したテキストを grep。
+- `<leader>g*`: クリップボードのテキストを grep。
 - `<leader>/`: 現在 buffer 内を fuzzy 検索。
 - `<leader>b`: buffer 一覧。
 - `<leader>o`: 最近開いたファイル。

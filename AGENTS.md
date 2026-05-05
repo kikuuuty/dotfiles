@@ -13,7 +13,7 @@
 - README と設定上の Windows 前提ツールは Git、Neovim、LLVM/Clang/clangd、CMake、ripgrep、fd、任意で Ninja。Treesitter parser 更新には `tree-sitter-cli` も必要。
 - Mason は `clangd` と `lua_ls` を管理するが、`automatic_enable = false`。LSP は `nvim-lspconfig.lua` で手動有効化している。
 - Treesitter は `c`、`cpp`、`lua`、`python`、`json` だけを対象にし、`auto_install = false`。C/C++ の indent は Treesitter ではなく標準 `cindent` を使うため、`disable = { "c", "cpp" }` を安易に外さない。
-- Telescope grep 系 keymap は `autochdir` 対策で Git repository root を `cwd` に指定している。`path_display` は `filename.ext (path/to/parent/)` 形式で括弧内を薄く表示する。
+- Telescope grep 系 keymap は `autochdir` 対策で Git repository root を `cwd` に指定している。`<leader>g` はカーソル下、`<leader>gy` は yank、`<leader>g*` は clipboard を grep する。`path_display` は `filename.ext (path/to/parent/)` 形式で括弧内を薄く表示する。
 - `telescope-fzf-native.nvim` には Windows 用の独自 build 関数がある。古い `cmake_minimum_required` を補正し、`libfzf.dll` を期待位置へ移すため、安易に単純化しない。
 - 補完は `blink.cmp` と LuaSnip。`config/keymaps.lua` は lazy setup 後に `luasnip` と `telescope.builtin` を require するため、起動時に使えなくする変更は keymaps も合わせて直す。
 
