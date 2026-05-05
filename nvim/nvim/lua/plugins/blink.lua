@@ -7,8 +7,8 @@ return {
     keymap = {
       preset = "none",
       ["<C-Space>"] = { "show" },
-      ["<Tab>"]     = { "accept", "fallback" },
-      ["<S-Tab>"]   = { "fallback" },
+      ["<Tab>"]     = { "select_next", "fallback" },
+      ["<S-Tab>"]   = { "select_prev", "fallback" },
       ["<C-n>"]     = { "select_next", "show" },
       ["<C-p>"]     = { "select_prev", "show" },
       ["<Up>"]      = { "select_prev", "fallback" },
@@ -20,13 +20,13 @@ return {
     },
     completion = {
       menu = { auto_show = true },
-      list = { selection = { preselect = false, auto_insert = false } },
+      list = { selection = { preselect = false, auto_insert = true } },
       documentation = {
         auto_show = true,
-        auto_show_delay_ms = 500,
+        auto_show_delay_ms = 200,
       },
       ghost_text = {
-        enabled = true,
+        enabled = false,
         show_with_menu = true,
         show_without_menu = false,
       },
