@@ -51,11 +51,27 @@ keymap("n", "<leader>rn", lsp_buf.rename, { desc = "LSP: シンボル名を変�
 
 -- Telescope
 local tb = require('telescope.builtin')
+local function grep_yank_text()
+  local text = vim.fn.getreg('"'):gsub('\r\n', '\n'):gsub('\n+$', '')
+  if text ~= '' then
+    tb.grep_string({ cwd = get_root(), search = text })
+  end
+end
+
+local function grep_clipboard_text()
+  local text = vim.fn.getreg('+'):gsub('\r\n', '\n'):gsub('\n+$', '')
+  if text ~= '' then
+    tb.grep_string({ cwd = get_root(), search = text })
+  end
+end
+
 keymap("n", "<C-p>", tb.git_files, { desc = "Telescope: Git管理ファイルを検索" })
 keymap("n", "<leader>b", tb.buffers, { desc = "Telescope: バッファ一覧を表示" })
 keymap("n", "<leader>o", tb.oldfiles, { desc = "Telescope: 最近開いたファイルを検索" })
 keymap('n', '<leader>f', function() tb.live_grep({ cwd = get_root() }) end, { desc = 'Telescope: リポジトリ内をgrep検索' })
 keymap("n", "<leader>g", function() tb.grep_string({ cwd = get_root() }) end, { desc = "Telescope: カーソル下の単語をgrep検索" })
+keymap("n", "<leader>gy", grep_yank_text, { desc = "Telescope: yank内容をgrep検索" })
+keymap("n", "<leader>g*", grep_clipboard_text, { desc = "Telescope: クリップボード内容をgrep検索" })
 keymap("n", "<leader>/", tb.current_buffer_fuzzy_find, { desc = "Telescope: 現在バッファ内を検索" })
 keymap("n", "<leader>gd", tb.lsp_definitions, { desc = "Telescope: 定義へ移動" })
 keymap("n", "<leader>gr", tb.lsp_references, { desc = "Telescope: 参照一覧を表示" })
@@ -66,4 +82,3 @@ keymap("n", "<leader>go", tb.lsp_outgoing_calls, { desc = "Telescope: 呼び出�
 keymap("n", "<leader>q", tb.diagnostics, { desc = "Telescope: 診断一覧を表示" })
 keymap("n", "<leader>h", tb.help_tags, { desc = "Telescope: ヘルプを検索" })
 keymap("n", "<leader>k", tb.keymaps, { desc = "Telescope: キーマップ一覧を表示" })
-
