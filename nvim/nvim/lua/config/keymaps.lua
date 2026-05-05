@@ -49,6 +49,9 @@ keymap("n", "gt", lsp_buf.type_definition, { desc = "LSP: 型定義へ移動" })
 keymap("n", "gi", lsp_buf.implementation, { desc = "LSP: 実装へ移動" })
 keymap("n", "<leader>rn", lsp_buf.rename, { desc = "LSP: シンボル名を変更" })
 
+-- Visual: 選択範囲をアルファベット順にソート
+keymap("v", "<leader>s", ":sort<CR>", { silent = true, desc = "Visual: 選択範囲をソート" })
+
 -- Telescope
 local tb = require('telescope.builtin')
 local function grep_yank_text()
