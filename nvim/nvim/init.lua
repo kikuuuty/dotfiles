@@ -1,5 +1,7 @@
 --require("config.path")
 require("config.options")
+require("config.gui")
+pcall(require, "config.gui_local")
 require("config.lazy")
 require("config.keymaps")
 

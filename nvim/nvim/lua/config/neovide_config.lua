@@ -2,15 +2,6 @@
 -- Display
 --
 
-
--- Font
---vim.o.guifont = "Consolas:h12"
-vim.o.guifont = "FiraMono Nerd Font Mono:h12"
---vim.o.guifont = "JetBrainsMonoNL NFM:h12"
-
--- Line spacing
---vim.opt.linespace = 0
-
 -- Scale
 --vim.g.neovide_scale_factor = 1.0
 
