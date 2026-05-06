@@ -36,7 +36,7 @@ nvim\install.bat
 - `nvim/nvim/lua/config/neovide_config.lua`: Neovide 専用の表示・入力設定。
 - `nvim/nvim/lua/plugins/*.lua`: lazy.nvim で読み込む plugin 設定。
 - `nvim/nvim/after/ftplugin/lua.lua`: Lua ファイルだけ indent 幅を 2 にします。
-- `nvim/nvim/after/ftplugin/cpp.lua`: C++ で標準 `cindent` と `cinoptions` を設定し、`[[nodiscard]]` などの属性指定子の直後だけインデントを補正します。
+- `nvim/nvim/after/ftplugin/cpp.lua`: C++ で標準 `cindent` と `cinoptions` を設定し、`[[nodiscard]]` や `template <...>` の直後だけインデントを補正します。
 
 ## UI
 
@@ -68,7 +68,7 @@ nvim\install.bat
 - 対象 parser は `c`、`cpp`、`lua`、`python`、`json` です。
 - `auto_install = false` のため、parser 更新は必要に応じて `:TSUpdate` を実行します。
 - highlight は Treesitter を使います。
-- indent は Treesitter を有効にしていますが、`c` / `cpp` は無効化して標準の `cindent` を使います。C++ では `after/ftplugin/cpp.lua` で `cinoptions = 'g0,N-s,:0'` を指定し、属性指定子の直後だけ追加補正しています。
+- indent は Treesitter を有効にしていますが、`c` / `cpp` は無効化して標準の `cindent` を使います。C++ では `after/ftplugin/cpp.lua` で `cinoptions = 'g0,N-s,:0'` を指定し、属性指定子や `template <...>` の直後だけ追加補正しています。
 
 ## Telescope
 

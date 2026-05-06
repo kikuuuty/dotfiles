@@ -7,7 +7,8 @@ local function cpp_indent()
 
   if lnum > 1 then
     local prev = vim.fn.prevnonblank(lnum - 1)
-    if prev > 0 and vim.fn.getline(prev):match('^%s*%[%[.-%]%]%s*$') then
+    local prevline = prev > 0 and vim.fn.getline(prev) or ''
+    if prevline:match('^%s*%[%[.-%]%]%s*$') or prevline:match('^%s*template%s*<.->%s*$') then
       indent = indent - vim.fn.shiftwidth()
     end
   end
