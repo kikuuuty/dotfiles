@@ -45,7 +45,12 @@ return {
         lualine_x = {
           { "lsp_status", separator = "|", padding = { left = 1, right = 1 }, },
           { "encoding",   separator = "|", padding = { left = 1, right = 1 }, },
-          { "fileformat", separator = "|", padding = { left = 1, right = 1 }, },
+          { function()
+              local ff = vim.bo.fileformat
+              return ({ unix = "LF", dos = "CRLF", mac = "CR" })[ff] or ff 
+            end,
+            separator = "|", padding = { left = 1, right = 1 },
+          },
         },
         lualine_y = {
           { "location", separator = "", },
