@@ -59,7 +59,7 @@ vim.g.neovide_scroll_animation_length = 0.233
 --vim.g.neovide_scroll_animation_far_lines = 1
 
 -- Hiding the mouse when typing
---vim.g.neovide_hide_mouse_when_typing = false
+vim.g.neovide_hide_mouse_when_typing = true
 
 -- Underline automatic scaling
 --vim.g.neovide_underline_stroke_scale = 1.0
