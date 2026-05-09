@@ -116,6 +116,47 @@ local function is_lambda_opening(line, col)
       or before:match('%b[]%s*%b()%s*[%w%s_:&*<>%-]*$') ~= nil
 end
 
+local function multiline_lambda_indent(lnum, line, col)
+  local before = line:sub(1, col - 1)
+  local lambda_start = before:find('%b[]%s*%b()%s*[%w%s_:&*<>%-]*$')
+      or before:find('%b[]%s*$')
+  if not lambda_start or before:sub(1, lambda_start - 1):match('%S') then
+    return nil
+  end
+
+  return vim.fn.indent(lnum)
+end
+
+local function inline_lambda_indent(lnum, line, col)
+  local before = line:sub(1, col - 1)
+  local lambda_start = before:find('%b[]%s*%b()%s*[%w%s_:&*<>%-]*$')
+      or before:find('%b[]%s*$')
+  if not lambda_start or not before:sub(1, lambda_start - 1):match('%S') then
+    return nil
+  end
+
+  local line_indent = vim.fn.indent(lnum)
+  if lambda_start <= line_indent + vim.fn.shiftwidth() * 2 then
+    return nil
+  end
+
+  return line_indent
+end
+
+local function lambda_argument_indent(lnum)
+  local line = vim.fn.getline(lnum)
+  if not line:match('^%s*%b[]%s*%b()%s*[%w%s_:&*<>%-]*{') then
+    return nil
+  end
+
+  local prev = vim.fn.prevnonblank(lnum - 1)
+  if prev == 0 or not vim.fn.getline(prev):match('%(%s*$') then
+    return nil
+  end
+
+  return vim.fn.indent(prev) + vim.fn.shiftwidth()
+end
+
 local function lambda_body_indent(lnum)
   local stack = {}
 
@@ -128,6 +169,7 @@ local function lambda_body_indent(lnum)
           line = i,
           col = col,
           lambda = is_lambda_opening(line, col),
+          indent = multiline_lambda_indent(i, line, col) or inline_lambda_indent(i, line, col),
         })
       elseif char == '}' then
         table.remove(stack)
@@ -135,21 +177,24 @@ local function lambda_body_indent(lnum)
     end
   end
 
-  local in_lambda = false
+  local lambda_indent = nil
   for _, item in ipairs(stack) do
     if item.lambda then
-      in_lambda = true
-      break
+      lambda_indent = item.indent
     end
   end
 
-  if not in_lambda or #stack == 0 then
+  if not lambda_indent or #stack == 0 then
     return nil
   end
 
   local current = vim.fn.getline(lnum)
   local block_start = stack[#stack]
   if current:match('^%s*}') then
+    if block_start.lambda then
+      return lambda_indent
+    end
+
     return vim.fn.indent(block_start.line)
   end
 
@@ -173,6 +218,10 @@ local function lambda_body_indent(lnum)
     return nil
   end
 
+  if block_start.lambda then
+    return lambda_indent + vim.fn.shiftwidth()
+  end
+
   return vim.fn.indent(block_start.line) + vim.fn.shiftwidth()
 end
 
@@ -180,7 +229,7 @@ local function cpp_indent()
   local lnum = vim.v.lnum
   local indent = vim.fn.cindent(lnum)
 
-  indent = matching_initializer_indent(lnum) or constructor_initializer_indent(lnum) or constructor_body_indent(lnum) or lambda_body_indent(lnum) or indent
+  indent = matching_initializer_indent(lnum) or constructor_initializer_indent(lnum) or constructor_body_indent(lnum) or lambda_argument_indent(lnum) or lambda_body_indent(lnum) or indent
 
   if lnum > 1 then
     local prev = vim.fn.prevnonblank(lnum - 1)
