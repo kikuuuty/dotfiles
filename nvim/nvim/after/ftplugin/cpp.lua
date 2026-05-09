@@ -1,5 +1,5 @@
 vim.opt_local.cindent = true
-vim.opt_local.cinoptions = 'g0,N-s,:0'
+vim.opt_local.cinoptions = 'g0,N-s,:0,(0'
 
 local function cpp_indent()
   local lnum = vim.v.lnum
