@@ -72,7 +72,7 @@ nvim\install.bat
 
 ## Telescope
 
-- `<C-p>` は Git 管理ファイル検索です。
+- `<C-p>` は Git 管理ファイル検索です。quickfix では上へ移動します。
 - `<leader>f` は Git repository root 全体を live grep します。`autochdir` 有効時に、開いているファイルの子ディレクトリだけを検索しないためです。
 - `<leader>g` はカーソル下の単語を repository root 全体で grep します。
 - `<leader>gy` は yank したテキストを grep します。
@@ -86,7 +86,7 @@ nvim\install.bat
 
 ## よく使う Keymap
 
-- `<C-p>`: Telescope で Git 管理ファイルを検索。
+- `<C-p>`: Telescope で Git 管理ファイルを検索。quickfix では上へ移動。
 - `<leader>f`: repository 全体を live grep。
 - `<leader>g`: カーソル下の単語を repository 全体で grep。
 - `<leader>gy`: yank したテキストを grep。
